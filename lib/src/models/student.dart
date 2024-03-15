@@ -4,41 +4,47 @@ import 'address.dart';
 import 'course.dart';
 
 class Student {
-  int ind;
-  String name;
-  int age;
-  List<String> nameCourses;
-  List<Course> courses;
-  Address address;
-  
+  final int? id;
+  final String name;
+  final int? age;
+  final List<String> nameCourses;
+  final List<Course> courses;
+  final Address address;
+
   Student({
-    required this.ind,
+    this.id,
     required this.name,
-    required this.age,
+    this.age,
     required this.nameCourses,
     required this.courses,
     required this.address,
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'ind': ind,
+    final data = <String, dynamic>{
+      'id': id,
       'name': name,
       'age': age,
       'nameCourses': nameCourses,
-      'courses': courses.map((x) => x.toMap()).toList(),
+      'courses': courses.map((course) => course.toMap()).toList(),
       'address': address.toMap(),
     };
+
+    if (age != null) {
+      data['age'] = age;
+    }
+
+    return data;
   }
 
   factory Student.fromMap(Map<String, dynamic> map) {
     return Student(
-      ind: map['ind']?.toInt() ?? 0,
+      id: map['id']?.toInt(),
       name: map['name'] ?? '',
-      age: map['age']?.toInt() ?? 0,
+      age: map['age']?.toInt(),
       nameCourses: List<String>.from(map['nameCourses'] ?? const []),
       courses: List<Course>.from(
-          map['courses']?.map((x) => Course.fromMap(x)) ?? const []),
+          map['courses']?.map((c) => Course.fromMap(c)) ?? const []),
       address: Address.fromMap(map['address']),
     );
   }
@@ -50,6 +56,6 @@ class Student {
 
   @override
   String toString() {
-    return 'Student(ind: $ind, name: $name, age: $age, nameCourses: $nameCourses, courses: $courses, address: $address)';
+    return 'Student(id: $id, name: $name, age: $age, nameCourses: $nameCourses, courses: $courses, address: $address)';
   }
 }

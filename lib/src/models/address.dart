@@ -4,11 +4,11 @@ import 'city.dart';
 import 'phone.dart';
 
 class Address {
-  String street;
-  int number;
-  String zipCode;
-  City city;
-  Phone phone;
+  final String street;
+  final int number;
+  final String zipCode;
+  final City city;
+  final Phone phone;
   Address({
     required this.street,
     required this.number,
@@ -32,14 +32,15 @@ class Address {
       street: map['street'] ?? '',
       number: map['number']?.toInt() ?? 0,
       zipCode: map['zipCode'] ?? '',
-      city: City.fromMap(map['city']),
-      phone: Phone.fromMap(map['phone']),
+      city: City.fromMap(map['city'] ?? {}),
+      phone: Phone.fromMap(map['phone'] ?? {}),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Address.fromJson(String source) => Address.fromMap(json.decode(source));
+  factory Address.fromJson(String source) =>
+      Address.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -49,21 +50,21 @@ class Address {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Address &&
-      other.street == street &&
-      other.number == number &&
-      other.zipCode == zipCode &&
-      other.city == city &&
-      other.phone == phone;
+        other.street == street &&
+        other.number == number &&
+        other.zipCode == zipCode &&
+        other.city == city &&
+        other.phone == phone;
   }
 
   @override
   int get hashCode {
     return street.hashCode ^
-      number.hashCode ^
-      zipCode.hashCode ^
-      city.hashCode ^
-      phone.hashCode;
+        number.hashCode ^
+        zipCode.hashCode ^
+        city.hashCode ^
+        phone.hashCode;
   }
 }

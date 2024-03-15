@@ -32,17 +32,4 @@ class Course {
 
   @override
   String toString() => 'Course(id: $id, name: $name, isStudent: $isStudent)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Course &&
-        other.id == id &&
-        other.name == name &&
-        other.isStudent == isStudent;
-  }
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ isStudent.hashCode;
 }
