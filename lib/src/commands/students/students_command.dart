@@ -4,6 +4,7 @@ import '../../repositories/student_repository.dart';
 import 'subcommands/find_all_command.dart';
 import 'subcommands/find_by_id_command.dart';
 import 'subcommands/insert_command.dart';
+import 'subcommands/update_command.dart';
 
 class StudentsCommand extends Command {
   @override
@@ -17,5 +18,6 @@ class StudentsCommand extends Command {
     addSubcommand(FindAllCommand(repository));
     addSubcommand(FindByIdCommand(repository));
     addSubcommand(InsertCommand(repository));
+    addSubcommand(UpdateCommand(repository));
   }
 }
