@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 
-import '../../../repositories/student_repository.dart';
+import '../../../repositories/student_dio_repository.dart';
 
 class DeleteCommand extends Command {
-  final StudentRepository repository;
+  final StudentDioRepository repository;
 
   DeleteCommand(this.repository) {
     argParser.addOption('id', help: 'The id of the student', abbr: 'i');
@@ -28,7 +28,7 @@ class DeleteCommand extends Command {
     final student = await repository.findById(id);
     print('Confirmar exclusão do aluno ${student.name}? (S ou N)');
     final showCourses = stdin.readLineSync();
-    if (showCourses?.toLowerCase() == 's') {
+    if (showCourses?.toLowerCase() == 's') { 
       print('Aguarde excluindo aluno...');
       print('-------------------------------------------');
       try {
